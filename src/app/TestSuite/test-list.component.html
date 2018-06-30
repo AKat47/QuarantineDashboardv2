@@ -1,0 +1,42 @@
+<div class ='panel panel-primary'>
+<div class ='panel-heading'>
+    {{title}}
+</div>
+        <div class='panel-body'>
+            <div class='row'>
+                    <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <button class="dropdown-item" type="button">Action</button>
+                        <button class="dropdown-item" type="button">Another action</button>
+                        <button class="dropdown-item" type="button">Something else here</button>
+                    </div>
+                    </div>
+            </div>
+        </div>
+            <div class ='table-responsive'>
+                <table class='table' *ngIf='testlist && testlist.length'>
+                    <thead>
+                        <tr>
+                            <th align="center">Test Name</th>
+                            <th align="center">Application</th>
+                            <th align="center">Risk</th>
+                            <th align="center">Feature</th>
+                            <th align="center">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor = 'let test of filteredList'>
+                            <td align="center">{{test.TestName }}  </td>
+                            <td align="center">{{test.Application}} </td>
+                            <td align="center">{{test.Risk}} </td>
+                            <td align="center">{{test.Feature}} </td>   
+                            <td align="center">{{test.Status}} </td>                          
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        
+</div>
