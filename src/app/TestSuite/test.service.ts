@@ -10,16 +10,17 @@ import { HttpErrorResponse } from "@angular/common/http";
 @Injectable()
 export class TestService
 {
-    private testlistUrl = './api/products/test.json';
+    private testlistUrl = './api/config/test.json';
 
     constructor(private _http:HttpClient){}
 
- getTests() :Observable<ITest[]>
- {
-     return this._http.get<ITest[]>(this.testlistUrl)
-        .do(data => console.log('All:' + JSON.stringify(data)))
-        .catch(this.handleError)
- }
+  getTests() :Observable<ITest[]>
+  {
+      return this._http.get<ITest[]>(this.testlistUrl)
+         .do(data => console.log('All:' + JSON.stringify(data)))
+         .catch(this.handleError)
+  }
+
 
  private handleError(err: HttpErrorResponse)
  {

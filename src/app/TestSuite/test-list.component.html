@@ -2,22 +2,37 @@
 <div class ='panel-heading'>
     {{title}}
 </div>
-        <div class='panel-body'>
-            <div class='row'>
-                    <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <button class="dropdown-item" type="button">Action</button>
-                        <button class="dropdown-item" type="button">Another action</button>
-                        <button class="dropdown-item" type="button">Something else here</button>
-                    </div>
-                    </div>
-            </div>
+
+        <div class="row dropdown">            
+            <div class="form-group">
+                <select class="form-control" (change)="onApplicationChange($event.target.value)" >
+                  <option *ngFor = 'let options of application'>{{options}}</option>
+                </select>
+              </div>              
         </div>
+
+        <div class="row dropdown">            
+                <div class="form-group">
+                    <select class="form-control" (change)="onRiskChange($event.target.value)">
+                      <option *ngFor = 'let options of risk'>{{options}}</option>
+                    </select>
+                  </div>              
+        </div>
+
+        <div class="row dropdown">            
+                <div class="form-group">
+                    <select class="form-control" (change)="onStatusChange($event.target.value)" >
+                      <option *ngFor = 'let options of status'>{{options}}</option>
+                    </select>
+                  </div>              
+                </div>
+
+        
+
+                
+            
             <div class ='table-responsive'>
-                <table class='table' *ngIf='testlist && testlist.length'>
+                <table class='table' *ngIf='filteredList && filteredList.length'>
                     <thead>
                         <tr>
                             <th align="center">Test Name</th>
