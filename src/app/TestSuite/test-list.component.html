@@ -35,15 +35,15 @@
                 <table class='table' *ngIf='filteredList && filteredList.length'>
                     <thead>
                         <tr>
-                            <th align="center">Test Name</th>
-                            <th align="center">Application</th>
-                            <th align="center">Risk</th>
-                            <th align="center">Feature</th>
-                            <th align="center">Status</th>
+                            <th align="center" style="text-align: center;">Test Name</th>
+                            <th align="center" style="text-align: center;">Application</th>
+                            <th align="center" style="text-align: center;">Risk</th>
+                            <th align="center" style="text-align: center;">Feature</th>
+                            <th align="center" style="text-align: center;">Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor = 'let test of filteredList'>
+                        <tr *ngFor = 'let test of getResource()'>
                             <td align="center">{{test.TestName }}  </td>
                             <td align="center">{{test.Application}} </td>
                             <td align="center">{{test.Risk}} </td>
@@ -53,5 +53,9 @@
                     </tbody>
                 </table>
             </div>
+
+            <ul>
+                <li *ngFor = 'let num of _nubmerOfPages' style="display: inline-block; margin-right: 10px; cursor: pointer;" (click)="setPageNumber(num)">{{num}}</li>
+            </ul>
         
 </div>

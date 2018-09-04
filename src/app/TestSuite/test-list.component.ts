@@ -34,18 +34,26 @@ export class TestListComponent{
         "Quarantine"
     ];
 
+    pageNumber: number = 1;
+    numberPerPage: number = 10;
+    numberOfPages: number;
+    _nubmerOfPages: number[];
   
   ngOnInit() :void
   {
-      this._testService.getTests()
-        .subscribe(testlist => {
-            this.testlist = testlist;
-            this.filteredList = this.testlist
-        },
-        error => this.errorMessage = <any> error);
+    //   this._testService.getTests()
+    //     .subscribe(testlist => {
+    //         this.testlist = testlist;
+    //         this.filteredList = this.testlist
+    //     },
+    //     error => this.errorMessage = <any> error);
       
-      console.log(" The filtered lisgt is ");
-      console.log(this.filteredList);
+        
+
+    //   console.log(" The filtered lisgt is ");
+    //   console.log(this.filteredList);
+    this._filteredList = this._getFakeData();
+    this.numberOfPages = this.getPageNumber(this.numberPerPage,this._filteredList);
   }
 
   get listFilter(): string{
@@ -108,4 +116,53 @@ performcategoryfilter() : void
     }
 
  
+    private _getFakeData(): ITest[]{
+        let tests: ITest[] = [];
+
+        for(let i =0; i < 40; i++){
+            let testName = 'testName' + i;
+            let application = 'application' + i;
+            let risk = 'risk' + i;
+            let feature = 'feature' + i;
+            let status = 'status' + i;
+
+            let fakeTest: ITest = {TestName: testName, Application: application, Risk: risk, Feature: feature, Status: status};
+            tests.push(fakeTest);
+        }
+
+        return tests;
+    }
+
+    private getPageNumber(nubmerPerPage: number, source: ITest[]) {
+        let numberOfPages = Math.floor(source.length / nubmerPerPage);
+        this._nubmerOfPages = [];
+        for(let i = 1; i <= numberOfPages; i++){
+            this._nubmerOfPages.push(i);
+        }
+        return numberOfPages;
+    }
+
+    getResource(){
+        let start = (this.pageNumber - 1) * this.numberPerPage;
+        let end = start + this.numberPerPage;
+
+        return this._filteredList.slice(start, end);
+    }
+
+    setPageNumber(pageNumber: number){
+        this.pageNumber = pageNumber;
+    }
 }
+
+class FilteredList {
+    tests: ITest[];
+}
+
+// class Test {
+//     TestName: string;
+//     Application: string;
+//     Risk: string;
+//     Feature: string;
+//     Status: string;
+// }
+
