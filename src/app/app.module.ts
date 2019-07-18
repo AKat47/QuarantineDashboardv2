@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TestListComponent } from './TestSuite/test-list.component';
 import { TestService } from "./TestSuite/test.service";
+import { PagerService } from "./TestSuite/pager.Service";
 import { HttpClientModule } from "@angular/common/http";
 import {
   MatButtonModule, MatMenuModule, MatDatepickerModule, MatNativeDateModule , MatIconModule, MatCardModule, MatSidenavModule, MatFormFieldModule,
@@ -37,7 +38,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatSelectModule,
     BrowserAnimationsModule
   ],
-  providers: [TestService],
+  providers: [TestService,PagerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

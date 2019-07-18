@@ -1,6 +1,7 @@
 import {Component,OnInit} from '@angular/core';
 import { ITest } from "./test";
 import { TestService } from "./test.service";
+import { PagerService } from "./pager.Service";
 import 'rxjs/add/operator/filter'
 
 
@@ -10,7 +11,7 @@ import 'rxjs/add/operator/filter'
   styleUrls: ['./test-list.component.css']
 })
 
-export class TestListComponent{
+export class TestListComponent{    
     errorMessage: any;
     title = 'Test List';
     _listFilter:string ;
@@ -18,8 +19,10 @@ export class TestListComponent{
     _application : "RC";
     _risk ="High" ;
     _status :"Stable";
+    pager: any = {};
+    pagedItems: any[];
     application: string[] = [
-        "RC",
+        "RewardCentre",
         "Matisse"
     ];
 
@@ -34,6 +37,7 @@ export class TestListComponent{
         "Quarantine"
     ];
 
+
     pageNumber: number = 1;
     numberPerPage: number = 10;
     numberOfPages: number;
@@ -45,13 +49,25 @@ export class TestListComponent{
         .subscribe(testlist => {
              this.testlist = testlist;
              this._filteredList = this.testlist;
+             this.numberOfPages = this.getPageNumber(this.numberPerPage,this._filteredList);
+             this.setPage(1);
          },
-         error => this.errorMessage = <any> error); 
-         
-         
-
-    this.numberOfPages = this.getPageNumber(this.numberPerPage,this._filteredList);
+         error => this.errorMessage = <any> error);   
   }
+
+  
+  setPage(page: number) {
+    if (page < 1 || page > this.pager.totalPages) {
+        return;
+    }
+
+    // get pager object from service
+    this.pager = this.pagerService.getPager(this._filteredList.length, page);
+
+    // get current page of items
+    this.pagedItems = this._filteredList.slice(this.pager.startIndex, this.pager.endIndex + 1);
+}
+
 
   get listFilter(): string{
       return this._listFilter;
@@ -70,7 +86,7 @@ export class TestListComponent{
       .filter((response:ITest) => response.Risk == "High");
   }
 
-  constructor(private _testService : TestService) {      
+  constructor(private _testService : TestService, private pagerService: PagerService ) {      
       this.listFilter = "RC";
   }
 
@@ -110,24 +126,6 @@ performcategoryfilter() : void
     }
     public set filteredList(value: ITest[]) {
         this._filteredList = value;
-    }
-
- 
-    private _getFakeData(): ITest[]{
-        let tests: ITest[] = [];
-
-        for(let i =0; i < 40; i++){
-            let testName = 'testName' + i;
-            let application = 'application' + i;
-            let risk = 'risk' + i;
-            let feature = 'feature' + i;
-            let status = 'status' + i;
-
-            let fakeTest: ITest = {TestName: testName, Application: application, Risk: risk, Feature: feature, Status: status};
-            tests.push(fakeTest);
-        }
-
-        return tests;
     }
 
     private getPageNumber(nubmerPerPage: number, source: ITest[]) {
