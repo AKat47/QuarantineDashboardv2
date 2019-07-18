@@ -6,17 +6,36 @@ import { AppComponent } from './app.component';
 import { TestListComponent } from './TestSuite/test-list.component';
 import { TestService } from "./TestSuite/test.service";
 import { HttpClientModule } from "@angular/common/http";
-
+import {
+  MatButtonModule, MatMenuModule, MatDatepickerModule, MatNativeDateModule , MatIconModule, MatCardModule, MatSidenavModule, MatFormFieldModule,
+  MatInputModule, MatTooltipModule, MatToolbarModule,MatSelectModule
+} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestListComponent,
+    TestListComponent  
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
+    MatRadioModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTooltipModule,
+    MatToolbarModule,
+    MatSelectModule,
+    BrowserAnimationsModule
   ],
   providers: [TestService],
   bootstrap: [AppComponent]

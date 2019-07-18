@@ -41,18 +41,15 @@ export class TestListComponent{
   
   ngOnInit() :void
   {
-    //   this._testService.getTests()
-    //     .subscribe(testlist => {
-    //         this.testlist = testlist;
-    //         this.filteredList = this.testlist
-    //     },
-    //     error => this.errorMessage = <any> error);
-      
-        
+        this._testService.getTests()
+        .subscribe(testlist => {
+             this.testlist = testlist;
+             this._filteredList = this.testlist;
+         },
+         error => this.errorMessage = <any> error); 
+         
+         
 
-    //   console.log(" The filtered lisgt is ");
-    //   console.log(this.filteredList);
-    this._filteredList = this._getFakeData();
     this.numberOfPages = this.getPageNumber(this.numberPerPage,this._filteredList);
   }
 
@@ -157,12 +154,3 @@ performcategoryfilter() : void
 class FilteredList {
     tests: ITest[];
 }
-
-// class Test {
-//     TestName: string;
-//     Application: string;
-//     Risk: string;
-//     Feature: string;
-//     Status: string;
-// }
-

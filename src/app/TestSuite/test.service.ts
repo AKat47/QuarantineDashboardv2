@@ -16,9 +16,7 @@ export class TestService
 
   getTests() :Observable<ITest[]>
   {
-      return this._http.get<ITest[]>(this.testlistUrl)
-         .do(data => console.log('All:' + JSON.stringify(data)))
-         .catch(this.handleError)
+      return this._http.get<ITest[]>(this.testlistUrl);
   }
 
 

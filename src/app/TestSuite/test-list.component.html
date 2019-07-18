@@ -1,35 +1,34 @@
 <div class ='panel panel-primary'>
-<div class ='panel-heading'>
-    {{title}}
-</div>
+<mat-card>
+   
+      <mat-card-content>
+        <mat-form-field>
+                <mat-label>Application</mat-label>
+                <mat-select>
+                        <mat-option *ngFor="let options of application" [value]="options">
+                                {{options}}
+                        </mat-option>
+                      </mat-select>
+        </mat-form-field>
 
-        <div class="row dropdown">            
-            <div class="form-group">
-                <select class="form-control" (change)="onApplicationChange($event.target.value)" >
-                  <option *ngFor = 'let options of application'>{{options}}</option>
-                </select>
-              </div>              
-        </div>
+        <mat-form-field>
+                <mat-label>Risk</mat-label>
+                <mat-select>
+                        <mat-option *ngFor="let options of risk" [value]="options">
+                                {{options}}
+                        </mat-option>
+                      </mat-select>
+        </mat-form-field>
 
-        <div class="row dropdown">            
-                <div class="form-group">
-                    <select class="form-control" (change)="onRiskChange($event.target.value)">
-                      <option *ngFor = 'let options of risk'>{{options}}</option>
-                    </select>
-                  </div>              
-        </div>
+        <mat-form-field>
+                <mat-label>Status</mat-label>
+                <mat-select>
+                        <mat-option *ngFor="let options of status" [value]="options">
+                                {{options}}
+                        </mat-option>
+                      </mat-select>
+        </mat-form-field>
 
-        <div class="row dropdown">            
-                <div class="form-group">
-                    <select class="form-control" (change)="onStatusChange($event.target.value)" >
-                      <option *ngFor = 'let options of status'>{{options}}</option>
-                    </select>
-                  </div>              
-                </div>
-
-        
-
-                
             
             <div class ='table-responsive'>
                 <table class='table' *ngIf='filteredList && filteredList.length'>
@@ -57,5 +56,6 @@
             <ul>
                 <li *ngFor = 'let num of _nubmerOfPages' style="display: inline-block; margin-right: 10px; cursor: pointer;" (click)="setPageNumber(num)">{{num}}</li>
             </ul>
-        
+        </mat-card-content>
+    </mat-card>
 </div>
