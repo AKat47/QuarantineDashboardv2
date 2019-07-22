@@ -1,7 +1,11 @@
+
+
 <div>
+        <div class="container">
 
         <div class="row dropdown">            
-                <div class="form-group">
+                <div class="form-group">                    
+                    <label> Application </label>
                     <select class="form-control" (change)="onApplicationChange($event.target.value)" >
                       <option *ngFor = 'let options of application'>{{options}}</option>
                     </select>
@@ -10,6 +14,7 @@
 
             <div class="row dropdown">            
                     <div class="form-group">
+                        <label> Risk </label>
                         <select class="form-control" (change)="onRiskChange($event.target.value)">
                           <option *ngFor = 'let options of risk'>{{options}}</option>
                         </select>
@@ -18,10 +23,22 @@
 
             <div class="row dropdown">            
                     <div class="form-group">
+                        <label> Status </label>
                         <select class="form-control" (change)="onStatusChange($event.target.value)">
                           <option *ngFor = 'let options of status'>{{options}}</option>
                         </select>
                       </div>              
+            </div>
+
+            
+            <div class="row">
+                <div class="form-group">
+                  <div class="md-form">
+                    <input type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInput>
+                    <label for="search">Search</label>
+                  </div>
+                </div>
+              </div>
             </div>
 
 <mat-card>
@@ -30,7 +47,7 @@
             <div class ='table-responsive'>
                 <table class='table' *ngIf='filteredList && filteredList.length'>
                     <thead>
-                        <tr>
+                        <tr ngclass="btn-primary">
                             <th align="left" style="text-align: left;">Test Name</th>
                             <th align="center" style="text-align: center;">Application</th>
                             <th align="center" style="text-align: center;">Risk</th>
@@ -39,8 +56,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor = 'let test of pagedItems'>
-                            <td align="left">{{test.TestName }}  </td>
+                        <tr *ngFor = "let test of pagedItems| filter : searchText" >
+                            <td align="left" [matTooltip] = "Description">{{test.TestName }}  </td>
                             <td align="center">{{test.Application}} </td>
                             <td align="center">{{test.Risk}} </td>
                             <td align="center">{{test.Feature}} </td>   

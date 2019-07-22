@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { TestListComponent } from './TestSuite/test-list.component';
 import { TestService } from "./TestSuite/test.service";
 import { PagerService } from "./TestSuite/pager.Service";
+import {SearchByNamePipe} from './TestSuite/search-by-name.pipe'
 import { HttpClientModule } from "@angular/common/http";
 import {
   MatButtonModule, MatMenuModule, MatDatepickerModule, MatNativeDateModule , MatIconModule, MatCardModule, MatSidenavModule, MatFormFieldModule,
@@ -14,10 +15,12 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatRadioModule } from '@angular/material/radio';
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    TestListComponent  
+    TestListComponent,
+    SearchByNamePipe
   ],
   imports: [
     BrowserModule,

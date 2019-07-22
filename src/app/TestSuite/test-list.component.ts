@@ -68,6 +68,12 @@ export class TestListComponent{
     this.pagedItems = this._filteredList.slice(this.pager.startIndex, this.pager.endIndex + 1);
 }
 
+ reset()
+ {
+    this.numberOfPages = this.getPageNumber(this.numberPerPage,this._filteredList);
+    this.setPage(1);
+ }
+
 
   get listFilter(): string{
       return this._listFilter;
@@ -117,6 +123,8 @@ performcategoryfilter() : void
         this.filteredList = this.filteredList.filter((response:ITest) => response.Application == this._application);
     if(this._risk)
         this.filteredList = this.filteredList.filter((response:ITest) => response.Risk == this._risk);      
+    this._filteredList = this.filteredList;
+    this.reset();
 }
 
   private _filteredList: ITest[];
